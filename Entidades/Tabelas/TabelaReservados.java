@@ -65,8 +65,8 @@ public class TabelaReservados {
     }
 
     public void imprimir() {
-        Enumeration codigos = tabela.elements();
-        Enumeration atomos = tabela.keys();  
+        Enumeration<String> codigos = tabela.elements();
+        Enumeration<String> atomos = tabela.keys();  
         // Displaying the Enumeration 
         System.out.println("  Tabela de Reservados\n");
         System.out.println("   Átomo       | Código");

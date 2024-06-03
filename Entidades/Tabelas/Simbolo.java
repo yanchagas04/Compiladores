@@ -18,7 +18,7 @@ public class Simbolo {
         setQntCharAntesTrunc(qntCharAntesTrunc);
         setQntCharDepoisTrunc(qntCharDepoisTrunc);
         setTipoSimbolo(tipoSimbolo);
-        ArrayList<Integer> linhas = new ArrayList<Integer>();
+        this.linhas = new ArrayList<Integer>();
         addLinhas(linha);
     }
 
