@@ -71,10 +71,8 @@ public class AnalisadorLexico {
     }
 
     public void aumentaLinha(int linha) {
-        if (leitor.hasNext("\n")){
-            setLinha(linha + 1);
-            leitor.next();
-        }    
+        setLinha(linha + 1);
+  
     }
 
     public void pularEspacos(){
@@ -100,7 +98,7 @@ public class AnalisadorLexico {
         String codigo = null;
         // if (fimDeArquivo())
         //     return null;
-        aumentaLinha(linha);
+        //aumentaLinha(linha);
         pularInvalidos();
         switch (this.escopo) {
             case Escopo.variavel:
@@ -109,10 +107,12 @@ public class AnalisadorLexico {
                 pularEspacos();
                 if (leitor.hasNext(inicio_variavel)){
                     atomo += leitor.next();
+                    System.out.println(atomo);
                     while (true) {
                         pularInvalidos();
                         if (leitor.hasNext(resto_variavel)){
                             atomo += leitor.next();
+                            System.out.println(atomo);
                         } else {
                             break;
                         }
@@ -124,6 +124,14 @@ public class AnalisadorLexico {
                     } else {
                         codigo = "C07";
                         tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));
+                    }
+                } else {
+                    if (leitor.hasNext()){
+                        String proximo_char = leitor.next();
+                        if (proximo_char.equals("\n"))
+                            aumentaLinha(linha);
+                    } else {
+                        return null;
                     }
                 }
                 break;

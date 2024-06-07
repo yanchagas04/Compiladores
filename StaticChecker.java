@@ -15,16 +15,12 @@ public class StaticChecker {
         Scanner leitor = new Scanner(arquivo);
         leitor.useDelimiter("");   
         AnalisadorLexico analisador = new AnalisadorLexico(tabRes, tabSim, Escopo.variavel, leitor, 1);
-        // while (true){
-        //     if (analisador.formarAtomo() == null) break;
-        // }
-        analisador.formarAtomo();
-        analisador.formarAtomo();
-        analisador.formarAtomo();
-        analisador.formarAtomo();
-        analisador.formarAtomo();
+        while (true){
+            if (analisador.formarAtomo() == null) break;
+        }
+        
         tabRes.imprimir();
         System.out.println(tabSim);
-        
+        System.out.println(analisador.getLinha());
     }
 }
