@@ -3,10 +3,12 @@ package Entidades.Analisadores;
 public class Atomo {
     private String atomo;
     private String codigo;
+    private int linha;
 
-    public Atomo(String atomo, String codigo){
+    public Atomo(String atomo, String codigo, int linha) {
         setAtomo(atomo);
         setCodigo(codigo);
+        setLinha(linha);
     }
 
     public String getAtomo() {
@@ -23,6 +25,14 @@ public class Atomo {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public int getLinha() {
+        return linha;
+    }
+
+    public void setLinha(int linha) {
+        this.linha = linha;
     }
 
     

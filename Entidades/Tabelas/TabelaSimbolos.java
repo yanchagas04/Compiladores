@@ -19,7 +19,30 @@ public class TabelaSimbolos {
         return retorno;
     }
 
+    public int proximaEntrada(){
+        return simbolos.size() + 1;
+    }
+
     public void addSimbolo(Simbolo simbolo){
         simbolos.add(simbolo);
+    }
+
+    public void addLinhaAoSimbolo(String simbolo, int linha){
+
+        for (Simbolo simb : simbolos){
+            if (simb.getLexeme().equals(simbolo)){
+                simb.addLinhas(linha);
+                return;
+            }
+        }
+    }
+
+    public boolean possui(String simbolo){
+
+        for (Simbolo simb : simbolos){
+            if (simb.getLexeme().equals(simbolo))
+                return true;
+        }
+        return false;
     }
 }

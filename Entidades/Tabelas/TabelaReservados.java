@@ -64,6 +64,16 @@ public class TabelaReservados {
         return tabela;
     }
 
+    public boolean possui(String atomo) {
+        Enumeration <String> atomos = tabela.keys();
+        while (atomos.hasMoreElements()) {
+            if (atomos.nextElement().toString().equals(atomo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void imprimir() {
         Enumeration<String> codigos = tabela.elements();
         Enumeration<String> atomos = tabela.keys();  

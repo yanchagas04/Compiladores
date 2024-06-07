@@ -1,6 +1,6 @@
 package Entidades.Analisadores;
 
-enum Escopo {
+public enum Escopo {
     variavel,
     nomPrograma,
     nomFuncao,

@@ -1,0 +1,1 @@
+javac StaticChecker.java
