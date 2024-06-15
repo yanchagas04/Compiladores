@@ -53,14 +53,7 @@ public class AnalisadorLexico {
     
     public Scanner getLeitor() {
         return leitor;
-    }
-    // public ArrayList<Character> addCharsNoEscopo(String sequencia){
-    //     ArrayList <Character> charsEscopo = new ArrayList<>();
-    //     for (int i = 0; i < sequencia.length(); i++){
-    //         charsEscopo.add(sequencia.toCharArray()[i]);
-    //     }
-    //     return charsEscopo;
-    // }   
+    }   
 
     public int getLinha() {
         return linha;
@@ -94,6 +87,35 @@ public class AnalisadorLexico {
         return false;
     }
 
+    public String truncar(String atomo, String codigo){
+        String retorno;
+        if (atomo.length() > 30){
+            if (codigo.equals("C01")){
+                retorno = atomo.substring(0, 29);
+                retorno += "\"";
+            } if (codigo.equals("C04")){
+                retorno = atomo.substring(0, 30);
+                if (retorno.charAt(29) == '+' || retorno.charAt(29) == '-'){
+                    retorno = retorno.substring(0, 29);
+                } else if (retorno.charAt(29) == '.'){
+                    retorno = retorno.substring(0, 29);
+                }
+            } else{
+                retorno = atomo.substring(0, 30);
+            }
+        } else {
+            retorno = atomo;
+        }
+        return retorno;
+    }
+
+    public String trocarCodigo(String atomo, String codigo){
+        if (codigo.equals("C04") && !truncar(atomo, codigo).contains(".")) {
+            return "C03";
+        }
+        return codigo;
+    }
+
     public Atomo formarAtomo(){
         //ArrayList <Character> charsEscopo = new ArrayList<>();
         String atomo = "";
@@ -122,11 +144,14 @@ public class AnalisadorLexico {
                     }
                     if (tabelaReservados.possui(atomo)){
                         codigo = tabelaReservados.getTabela().get(atomo);
-                    } else if (tabelaSimbolos.possui(atomo)) {
-                        tabelaSimbolos.addLinhaAoSimbolo(atomo, linha);
-                    } else {
+                    }
+                    else {
                         codigo = "C07";
-                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));
+                        if (tabelaSimbolos.possui(atomo, codigo)) {
+                            tabelaSimbolos.addLinhaAoSimbolo(atomo, linha);
+                        } else {
+                            tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));
+                        }
                     }
                 } else { //COISAS QUE NÃO SÃO VARIAVEIS
                     if (simbolosCombinados()){ //SIMBOLOS COM 2 CARACTERES
@@ -147,7 +172,7 @@ public class AnalisadorLexico {
                             }
                             if (leitor.hasNext("e")){
                                 atomo += leitor.next();
-                                if (leitor.hasNext("+") || leitor.hasNext("-")){
+                                if (leitor.hasNext("\\+") || leitor.hasNext("-") || leitor.hasNext("[0-9]")) {
                                     atomo += leitor.next();
                                     while (leitor.hasNext("[0-9]")) {
                                         atomo += leitor.next();
@@ -155,7 +180,28 @@ public class AnalisadorLexico {
                                 } 
                             }
                         }
-                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));   
+                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), trocarCodigo(atomo, codigo), truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));   
+                    } else if (leitor.hasNext("\'")){ //CARACTER
+                        atomo += leitor.next();
+                        if (leitor.hasNext("[a-z]")){
+                            atomo += leitor.next();
+                            if (leitor.hasNext("\'")){
+                                atomo += leitor.next();
+                                codigo = "C02";
+                                tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));
+                            }
+                        } else{
+                            atomo = "";
+                            codigo = null;
+                        }
+                    } else if (leitor.hasNext("\"")) { //STRING
+                        atomo += leitor.next();
+                        while (leitor.hasNext("[a-z]| |\\$|_|[0-9]|\\."))
+                            atomo += leitor.next();
+                        if (leitor.hasNext("\""))
+                            atomo += leitor.next();
+                        codigo = "C01";
+                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));
                     }
                     else if (leitor.hasNext()){ //SIMBOLOS COM 1 CARACTERE
                         String proximo_char = leitor.next();
@@ -195,11 +241,14 @@ public class AnalisadorLexico {
                     }
                     if (tabelaReservados.possui(atomo)){
                         codigo = tabelaReservados.getTabela().get(atomo);
-                    } else if (tabelaSimbolos.possui(atomo)) {
-                        tabelaSimbolos.addLinhaAoSimbolo(atomo, linha);
-                    } else {
+                    }
+                    else {
                         codigo = "C07";
-                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));
+                        if (tabelaSimbolos.possui(atomo, codigo)) {
+                            tabelaSimbolos.addLinhaAoSimbolo(atomo, linha);
+                        } else {
+                            tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));
+                        }
                     }
                 } else { //COISAS QUE NÃO SÃO VARIAVEIS
                     if (simbolosCombinados()){ //SIMBOLOS COM 2 CARACTERES
@@ -220,7 +269,7 @@ public class AnalisadorLexico {
                             }
                             if (leitor.hasNext("e")){
                                 atomo += leitor.next();
-                                if (leitor.hasNext("+") || leitor.hasNext("-")){
+                                if (leitor.hasNext("\\+") || leitor.hasNext("-") || leitor.hasNext("[0-9]")) {
                                     atomo += leitor.next();
                                     while (leitor.hasNext("[0-9]")) {
                                         atomo += leitor.next();
@@ -228,7 +277,29 @@ public class AnalisadorLexico {
                                 } 
                             }
                         }
-                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));   
+                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));   
+                    }
+                    else if (leitor.hasNext("\'")){ //CARACTER
+                        atomo += leitor.next();
+                        if (leitor.hasNext("[a-z]")){
+                            atomo += leitor.next();
+                            if (leitor.hasNext("\'")){
+                                atomo += leitor.next();
+                                codigo = "C02";
+                                tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));
+                            }
+                        } else{
+                            atomo = "";
+                            codigo = null;
+                        }
+                    } else if (leitor.hasNext("\"")) { //STRING
+                        atomo += leitor.next();
+                        while (leitor.hasNext("[a-z]| |\\$|_|[0-9]|\\."))
+                            atomo += leitor.next();
+                        if (leitor.hasNext("\""))
+                            atomo += leitor.next();
+                        codigo = "C01";
+                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));
                     }
                     else if (leitor.hasNext()){ //SIMBOLOS COM 1 CARACTERE
                         String proximo_char = leitor.next();
@@ -268,11 +339,11 @@ public class AnalisadorLexico {
                     }
                     if (tabelaReservados.possui(atomo)){
                         codigo = tabelaReservados.getTabela().get(atomo);
-                    } else if (tabelaSimbolos.possui(atomo)) {
+                    } else if (tabelaSimbolos.possui(atomo, codigo)) {
                         tabelaSimbolos.addLinhaAoSimbolo(atomo, linha);
                     } else {
                         codigo = "C05";
-                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));
+                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));
                     }
                 } else {
                     if (leitor.hasNext()){
@@ -303,11 +374,11 @@ public class AnalisadorLexico {
                     }
                     if (tabelaReservados.possui(atomo)){
                         codigo = tabelaReservados.getTabela().get(atomo);
-                    } else if (tabelaSimbolos.possui(atomo)) {
+                    } else if (tabelaSimbolos.possui(atomo, codigo)) {
                         tabelaSimbolos.addLinhaAoSimbolo(atomo, linha);
                     } else {
                         codigo = "C06";
-                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, atomo, atomo.length(), atomo.length(), "VOI", linha));
+                        tabelaSimbolos.addSimbolo(new Simbolo(tabelaSimbolos.proximaEntrada(), codigo, truncar(atomo, codigo), atomo.length(), truncar(atomo, codigo).length(), "VOI", linha));
                     }
                 } else {
                     if (leitor.hasNext()){

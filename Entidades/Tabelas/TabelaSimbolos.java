@@ -37,7 +37,7 @@ public class TabelaSimbolos {
         }
     }
 
-    public boolean possui(String simbolo){
+    public boolean possui(String simbolo, String codigo){
 
         for (Simbolo simb : simbolos){
             if (simb.getLexeme().equals(simbolo))

@@ -4,6 +4,10 @@ declaracoes
 
 tipoVar inteiro: coco123[2], show[3]
 
+tipoVar inteiro: essavariaveltemmuitocaractereesocorro
+
+essavariaveltemmuitocaractereesocorro := 123456789012345678901234.0e12
+
 fimDeclaracoes
 
 funcoes
