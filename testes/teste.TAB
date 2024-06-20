@@ -5,7 +5,7 @@ Componentes:
 	nome; email; (71)x xxxx-xxxx
 	nome; email; (71)x xxxx-xxxx
 
-RELATÓRIO DA ANÁLISE DA TABELA DE SÍMBOLOS. Texto fonte analisado: E:\Programacao\Java\Compiladores\Compiladores\testes\teste.241
+RELATÓRIO DA ANÁLISE DA TABELA DE SÍMBOLOS. Texto fonte analisado: Testes/teste.241
 
 
 Entrada: 1, Código: C07, Lexeme: TESTE, QntCharAntesTrunc: 5, QntCharDepoisTrunc: 5, TipoSimbolo: VOI, Linhas = [1]

@@ -82,8 +82,6 @@ public class AnalisadorSintatico {
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo nao existe!");
         }
-        System.out.println("Pressione qualquer tecla para sair...");
-        sc.nextLine();
         sc.close();
     }
 }

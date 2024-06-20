@@ -5,7 +5,7 @@ Componentes:
 	nome; email; (71)x xxxx-xxxx
 	nome; email; (71)x xxxx-xxxx
 
-RELATÓRIO DA ANÁLISE LÉXICA. Texto fonte analisado: E:\Programacao\Java\Compiladores\Compiladores\testes\teste.241
+RELATÓRIO DA ANÁLISE LÉXICA. Texto fonte analisado: Testes/teste.241
 
 
 Lexeme: programa, Código: A17, IndiceTabSim: N/A, Linha: 1
