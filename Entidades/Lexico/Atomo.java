@@ -1,15 +1,19 @@
-package Entidades.Analisadores;
+package Entidades.Lexico;
 
 public class Atomo {
     private String atomo;
     private String codigo;
     private int linha;
+    private String indiceTabSim;
 
-    public Atomo(String atomo, String codigo, int linha) {
+    public Atomo(String atomo, String codigo, int linha, String indiceTabSim) {
         setAtomo(atomo);
         setCodigo(codigo);
         setLinha(linha);
+        setIndiceTabSim(indiceTabSim);
     }
+
+    
 
     public String getAtomo() {
         return atomo;
@@ -35,5 +39,19 @@ public class Atomo {
         this.linha = linha;
     }
 
-    
+
+
+    public String getIndiceTabSim() {
+        return indiceTabSim;
+    }
+
+
+
+    public void setIndiceTabSim(String indiceTabSim) {
+        this.indiceTabSim = indiceTabSim;
+    }
+
+    public String toString() {
+        return ("Lexeme: " + atomo + ", Código: " + codigo + ", IndiceTabSim: " + indiceTabSim + ", Linha: " + linha);
+    }
 }

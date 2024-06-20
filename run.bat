@@ -1,1 +1,0 @@
-java StaticChecker teste.241

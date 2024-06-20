@@ -1,4 +1,4 @@
-package Entidades.Tabelas;
+
 
 import java.util.Dictionary;
 import java.util.Enumeration;

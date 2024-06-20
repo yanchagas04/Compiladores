@@ -1,0 +1,20 @@
+programa teste
+
+declaracoes
+
+tipoVar inteiro[]: coco123[2], show[3]
+
+tipoVar logico: essavariaveltemmuitocaractereesocorro
+
+essavariaveltemmuitocaractereesocorro := 3 > 2
+
+fimDeclaracoes
+
+funcoes
+/*este eh um comentario e deve ser desconsiderado
+
+tipoFunc inteiro: funcaobraba(cocozoide) fimFunc
+
+fimFuncoes
+
+fimPrograma

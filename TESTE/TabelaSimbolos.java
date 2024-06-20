@@ -1,4 +1,4 @@
-package Entidades.Tabelas;
+
 import java.util.ArrayList;
 
 public class TabelaSimbolos {
