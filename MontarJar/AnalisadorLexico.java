@@ -1,12 +1,6 @@
-package Entidades.Lexico;
-
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-import Entidades.Tabelas.Simbolo;
-import Entidades.Tabelas.TabelaReservados;
-import Entidades.Tabelas.TabelaSimbolos;
 
 public class AnalisadorLexico {
     private TabelaReservados tabelaReservados;
@@ -100,6 +94,16 @@ public class AnalisadorLexico {
         while (leitor.hasNext(invalidos)){
             leitor.next();
         }
+    }
+
+    public boolean simbolosCombinados(){
+        leitor.useDelimiter("[^(\\:=|\\!=|\\<=|==|\\>=)]");
+        if (leitor.hasNext(":=") || leitor.hasNext("!=") || leitor.hasNext("<=") || leitor.hasNext("==") || leitor.hasNext(">=")){
+            leitor.useDelimiter("");
+            return true;
+        }
+        leitor.useDelimiter("");
+        return false;
     }
 
     public String truncar(String atomo, String codigo){

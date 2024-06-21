@@ -52,9 +52,7 @@ Lexeme: essavariaveltemmuitocaractereesocorro, Código: C07, IndiceTabSim: 6, Li
 
 Lexeme: essavariaveltemmuitocaractereesocorro, Código: C07, IndiceTabSim: 7, Linha: 9
 
-Lexeme: :, Código: B05, IndiceTabSim: N/A, Linha: 9
-
-Lexeme: =, Código: null, IndiceTabSim: 7, Linha: 9
+Lexeme: :=, Código: B06, IndiceTabSim: N/A, Linha: 9
 
 Lexeme: 3, Código: C03, IndiceTabSim: 7, Linha: 9
 
