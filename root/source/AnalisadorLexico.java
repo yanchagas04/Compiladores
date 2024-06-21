@@ -1,3 +1,4 @@
+package source;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -85,7 +86,6 @@ public class AnalisadorLexico {
                 if (leitor.hasNext("\\/"))
                     leitor.next();
             }
-            //adicionar no LEX dps
         }
     }
     
@@ -94,16 +94,6 @@ public class AnalisadorLexico {
         while (leitor.hasNext(invalidos)){
             leitor.next();
         }
-    }
-
-    public boolean simbolosCombinados(){
-        leitor.useDelimiter("[^(\\:=|\\!=|\\<=|==|\\>=)]");
-        if (leitor.hasNext(":=") || leitor.hasNext("!=") || leitor.hasNext("<=") || leitor.hasNext("==") || leitor.hasNext(">=")){
-            leitor.useDelimiter("");
-            return true;
-        }
-        leitor.useDelimiter("");
-        return false;
     }
 
     public String truncar(String atomo, String codigo){
@@ -329,9 +319,7 @@ public class AnalisadorLexico {
                                 nova_entrada = "N/A";
                             }
                         }
-                    } /*else if () {
-
-                    } */ else {
+                    } else {
                         return null;
                     }
                 }

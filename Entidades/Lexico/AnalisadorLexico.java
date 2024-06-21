@@ -91,7 +91,6 @@ public class AnalisadorLexico {
                 if (leitor.hasNext("\\/"))
                     leitor.next();
             }
-            //adicionar no LEX dps
         }
     }
     
@@ -325,9 +324,7 @@ public class AnalisadorLexico {
                                 nova_entrada = "N/A";
                             }
                         }
-                    } /*else if () {
-
-                    } */ else {
+                    } else {
                         return null;
                     }
                 }
