@@ -1,0 +1,26 @@
+programa Teste
+
+declaracoes
+
+	tipoVar cadeia: stringTeste
+
+fimDeclaracoes
+
+funcoes
+
+	//comentario de linha que sera desconsiderado
+
+	tipoFunc vazio: imprimeTexto(tipoParam cadeia: stringDesejada)
+	
+		imprime stringDesejada 
+
+	fimFunc
+	
+/*
+Comentario de bloco
+que sera desconsiderado 
+*/
+
+fimFuncoes
+
+fimPrograma
