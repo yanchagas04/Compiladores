@@ -2,7 +2,7 @@ programa teste
 
 declaracoes
 
-tipoVar inteiro[]: coco123[2], show[3]
+tipoVar inteiro[]: array1[2], array2[3]
 
 tipoVar logico: essavariaveltemmuitocaractereesocorro
 

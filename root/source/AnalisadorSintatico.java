@@ -10,7 +10,7 @@ public class AnalisadorSintatico {
 
     public static Escopo mudarEscopo(String codigo, Escopo escopo_atual) {
         if (codigo == null)
-            return Escopo.variavel;
+            return escopo_atual;
         if (codigo.equals("A17"))
             return Escopo.nomPrograma;
         if (codigo.equals("A22")){

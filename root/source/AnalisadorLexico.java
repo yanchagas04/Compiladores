@@ -100,9 +100,8 @@ public class AnalisadorLexico {
         String retorno;
         if (atomo.length() > 30){
             if (codigo.equals("C01")){
-                retorno = atomo.substring(0, 29);
-                retorno += "\"";
-            } if (codigo.equals("C04")){
+                retorno = atomo.substring(0, 29) + "\"";
+            } else if (codigo.equals("C04")){
                 retorno = atomo.substring(0, 30);
                 if (retorno.charAt(29) == '+' || retorno.charAt(29) == '-'){
                     retorno = retorno.substring(0, 29);

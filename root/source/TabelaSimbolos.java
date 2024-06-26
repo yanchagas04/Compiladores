@@ -18,10 +18,10 @@ public class TabelaSimbolos {
         String retorno = "";
         retorno = "Código da Equipe: 04\n";
         retorno = retorno + "Componentes:\n";
-        retorno = retorno + "\tnome; email; (71)x xxxx-xxxx\n";
-        retorno = retorno + "\tnome; email; (71)x xxxx-xxxx\n";
-        retorno = retorno + "\tnome; email; (71)x xxxx-xxxx\n";
-        retorno = retorno + "\tnome; email; (71)x xxxx-xxxx\n\n";
+        retorno = retorno + "\tYan Campêlo das Chagas; yan.chagas@aln.senaicimatec.edu.br; (71) 9 9609-6720\n";
+        retorno = retorno + "\tPedro Lima Almeida Santos; pedro.l.santos@aln.senaicimatec.edu.br; (71) 9 9934-7916\n";
+        retorno = retorno + "\tVitor Hugo de Jesus Santos; vitor.s@aln.senaicimatec.edu.br; (71) 9 9170-5668\n";
+        retorno = retorno + "\tVinicius Fernandes de Oliveira; vinicius.o@aln.senaicimatec.edu.br; (71) 9 87360997\n\n";
         retorno = retorno + "RELATÓRIO DA ANÁLISE DA TABELA DE SÍMBOLOS. Texto fonte analisado: " + nome_arquivo + "\n";
         retorno = retorno + "\n\n";
         for (Simbolo simb : simbolos){
